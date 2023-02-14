@@ -4,7 +4,7 @@
       <br />
       <div class="fofa-group">
         <div>
-          <a-divider style="font-size: 20px">组件信息</a-divider>
+          <a-divider style="font-size: 18px">组件信息</a-divider>
           <div>
             <a-spin :delay="1" :spinning="HostStatus">
               <p>
@@ -51,7 +51,51 @@
             </a-spin>
           </div>
         </div>
-        <a-divider />
+        <a-divider style="font-size: 18px">站点权重信息</a-divider>
+        <div>
+          <div v-if="seodata" style="text-align: center">
+            <span
+              >百度：
+              <a-tag color="green" style="font-size: 14px">
+                <div v-if="seodata.baidu">
+                  {{ seodata.baidu }}
+                </div>
+                <div v-else>-</div>
+              </a-tag>
+            </span>
+            <span
+              >360：<a-tag color="green" style="font-size: 14px">
+                <div v-if="seodata.s360">
+                  {{ seodata.s360 }}
+                </div>
+                <div v-else>-</div>
+              </a-tag></span
+            >
+            <span
+              >搜狗：<a-tag color="green" style="font-size: 14px">
+                <div v-if="seodata.sougou">
+                  {{ seodata.sougou }}
+                </div>
+                <div v-else>-</div>
+              </a-tag></span
+            >
+            <span
+              >神马：<a-tag color="green" style="font-size: 14px">
+                <div v-if="seodata.shenma">
+                  {{ seodata.shenma }}
+                </div>
+                <div v-else>-</div>
+              </a-tag></span
+            >
+          </div>
+          <div v-else>
+            <span>百度：<a-tag color="green" style="font-size: 14px"> - </a-tag></span>
+            <span>360：<a-tag color="green" style="font-size: 14px"> - </a-tag></span>
+            <span>搜狗：<a-tag color="green" style="font-size: 14px"> - </a-tag></span>
+            <span>神马：<a-tag color="green" style="font-size: 14px"> - </a-tag></span>
+          </div>
+        </div>
+        <a-divider style="font-size: 18px">端口信息</a-divider>
         <div v-if="Ip || Domain">
           <div>
             FOFA推荐语句：
@@ -131,6 +175,7 @@ export default defineComponent({
     const { proxy } = getCurrentInstance(); //来获取全局 globalProperties 中配置的信息
     //定义变量
     const urldata = ref(null);
+    const seodata = ref({});
     const domaindata = ref("");
     const dataSource = ref([]);
     const Ip = ref(null);
@@ -151,6 +196,7 @@ export default defineComponent({
       ) {
         getHost();
         geturlinfo();
+        getseo();
         return;
       }
       sendResponse("OK");
@@ -296,6 +342,22 @@ export default defineComponent({
         message.error("ERROR:" + error.message);
       }
     };
+    //获取seo信息
+    const getseo = () => {
+      try {
+        let url = urldata.value;
+        proxy.$get(`http://api.iot-wiki.cn/api/v1/seo?url=${url}`).then((res) => {
+          if (res.code == 200) {
+            seodata.value = res.data.list;
+          } else {
+            message.error("ERROR:" + res.message);
+          }
+        });
+      } catch (error) {
+        message.error("ERROR:" + error.message);
+      }
+    };
+
     //单击复制事件
     const copy = (event) => {
       navigator.clipboard.writeText(event).then(() => {
@@ -350,6 +412,7 @@ export default defineComponent({
       HostStatus,
       MainLoading,
       tableLoading,
+      seodata,
 
       //自定义函数
       copy,
