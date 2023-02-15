@@ -54,3 +54,9 @@ npm run lint
 ## 时间线
 
 -  2023-02-02 Github开源发布，Chrome商店提交审核上架。
+-  2023-02-14 已添加SEO查询功能。
+
+## 致谢
+
+fofa-search已加入FOFA[共创者计划](https://fofa.info/development)，感谢FOFA提供的账号支持。
+
