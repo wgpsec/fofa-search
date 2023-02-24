@@ -10,7 +10,7 @@
             "128": "assets/128.png"
         },
         "default_popup": "popup.html",
-        "default_title": "fofa_search"
+        "default_title": "fofa search"
     },
     "background": {
         "service_worker": "js/background.js"
