@@ -3,6 +3,10 @@
     "manifest_version": 3,
     "name": "fofa search",
     "version": "1.1.0",
+<<<<<<< HEAD
+=======
+    "default_locale":"zh", 
+>>>>>>> 682ee9e31c8b3047b4a2415a1f94c2d42b7a0bfc
     "action": {
         "default_icon": {
             "16": "assets/16.png",

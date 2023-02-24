@@ -1,0 +1,27 @@
+{
+    "extName": {
+        "message": "扩展的描述信息",
+        "description": "test"
+    },
+    "colores": {
+        "message": "colores",
+        "description": "test"
+    },
+    "title": "组件信息",
+    "description": {
+        "country": "国家",
+        "city": "城市",
+        "organization": "组织"
+    },
+    "seotitle": "站点权重信息",
+    "seodescription": {
+        "baidu": "百度",
+        "pc360": "360",
+        "sougou": "搜狗",
+        "shenmax": "神马"
+    },
+    "portitle": "端口信息",
+    "portdescription": {
+        "recommendtitle": "FOFA推荐语句"
+    }
+}

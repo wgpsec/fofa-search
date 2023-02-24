@@ -2,7 +2,11 @@
  * @Author: zhizhuo 
  * @Date: 2023-02-02 13:42:49 
  * @Last Modified by: zhizhuo
+<<<<<<< HEAD
  * @Last Modified time: 2023-02-24 15:07:56
+=======
+ * @Last Modified time: 2023-02-24 14:52:07
+>>>>>>> 682ee9e31c8b3047b4a2415a1f94c2d42b7a0bfc
  */
 
 const CopyWebpackPlugin = require("copy-webpack-plugin");
@@ -15,6 +19,13 @@ const copyFiles = [
     to: `${path.resolve("dist")}/manifest.json`
   },
   {
+<<<<<<< HEAD
+=======
+    from: path.resolve("src/plugins/_locales/"),
+    to: `${path.resolve("dist")}/_locales/`
+  },
+  {
+>>>>>>> 682ee9e31c8b3047b4a2415a1f94c2d42b7a0bfc
     from: path.resolve("src/assets"),
     to: path.resolve("dist/assets")
   },

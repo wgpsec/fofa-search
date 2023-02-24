@@ -1,0 +1,27 @@
+{
+    "extName": {
+        "message": "扩展的描述信息",
+        "description":"test"
+    },
+    "colores": {
+        "message": "colores",
+        "description":"test"
+    },
+    "title": "Component information",
+    "description": {
+        "country": "Country",
+        "city": "City",
+        "organization": "Organization"
+    },
+    "seotitle": "Site Weight Information",
+    "seodescription": {
+        "baidu": "Baidu",
+        "pc360": "360",
+        "sougou": "Sougou",
+        "shenmax": "Shenma"
+    },
+    "portitle": "Prot information",
+    "portdescription": {
+        "recommendtitle": "FOFA recommendation statement"
+    }
+}
