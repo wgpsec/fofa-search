@@ -9,9 +9,7 @@ import axios from '../plugins/axios'
 
 const app = createApp(App)
 
-app.use(Antd).use(axios)
-
-app.mount('#app')
+app.use(Antd).use(axios).mount('#app')
 
 
 //监听消息事件
