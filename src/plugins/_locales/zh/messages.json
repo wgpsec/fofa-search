@@ -7,6 +7,6 @@
         "message": "这是一个基于fofa的chrome浏览器插件，方便用户快速查找网站信息。"
     },
     "MainDesc": {
-        "message": "{'title':'组件信息','description':{'country':'国家','city':'城市','organization':'组织','lastime':'最后更新时间'},'seotitle':'站点权重信息','seodescription':{'baidu':'百度','pc360':'360','sougou':'搜狗','shenmax':'神马'},'portitle':'端口信息','portdescription':{'recommendtitle':'FOFA推荐语句','prompt':'正在生成请稍等...','prompterror':'无法获取该站点信息'},'MainError':{'buttonerror':'请不要在插件中心点击此插件！','geturlerror':'获取url失败，请刷新Tab'}}"
+        "message": "{'title':'组件信息','description':{'country':'国家','city':'城市','organization':'组织','lastime':'最后更新时间'},'seotitle':'站点权重信息','seodescription':{'baidu':'百度','pc360':'360','sougou':'搜狗','shenma':'神马'},'portitle':'端口信息','portdescription':{'recommendtitle':'FOFA推荐语句','prompt':'正在生成请稍等...','prompterror':'无法获取该站点信息'},'MainError':{'buttonerror':'请不要在插件中心点击此插件！','geturlerror':'获取url失败，请刷新Tab'}}"
     }
 }

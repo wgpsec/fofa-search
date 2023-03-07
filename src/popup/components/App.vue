@@ -4,7 +4,7 @@
       <br />
       <div class="fofa-group">
         <div>
-          <a-divider style="font-size: 18px">组件信息</a-divider>
+          <a-divider style="font-size: 18px">{{ MainDesc.title }}</a-divider>
           <div>
             <a-spin :delay="1" :spinning="HostStatus">
               <p>
@@ -14,19 +14,28 @@
                   </a-tag>
                 </span>
                 <span>
-                  国家：<a-tag color="green" style="font-size: 14px">
+                  {{ MainDesc.description.country }}：<a-tag
+                    color="green"
+                    style="font-size: 14px"
+                  >
                     {{ HostData.country }}
                   </a-tag>
                 </span>
                 <span>
-                  城市：<a-tag color="green" style="font-size: 14px">
+                  {{ MainDesc.description.city }}：<a-tag
+                    color="green"
+                    style="font-size: 14px"
+                  >
                     {{ HostData.city }}
                   </a-tag>
                 </span>
               </p>
               <p>
                 <span>
-                  组织：<a-tag color="green" style="font-size: 14px">
+                  {{ MainDesc.description.organization }}：<a-tag
+                    color="green"
+                    style="font-size: 14px"
+                  >
                     {{ HostData.group }}
                   </a-tag>
                 </span>
@@ -43,7 +52,10 @@
               </p>
               <p>
                 <span>
-                  最后更新时间：<a-tag color="green" style="font-size: 14px">
+                  {{ MainDesc.description.lastime }}：<a-tag
+                    color="green"
+                    style="font-size: 14px"
+                  >
                     {{ HostData.update_time }}
                   </a-tag>
                 </span>
@@ -51,11 +63,11 @@
             </a-spin>
           </div>
         </div>
-        <a-divider style="font-size: 18px">站点权重信息</a-divider>
+        <a-divider style="font-size: 18px">{{ MainDesc.seotitle }}</a-divider>
         <div>
           <div v-if="seodata" style="text-align: center">
             <span
-              >百度：
+              >{{ MainDesc.seodescription.baidu }}：
               <a-tag color="green" style="font-size: 14px">
                 <div v-if="seodata.baidu">
                   {{ seodata.baidu }}
@@ -64,7 +76,10 @@
               </a-tag>
             </span>
             <span
-              >360：<a-tag color="green" style="font-size: 14px">
+              >{{ MainDesc.seodescription.pc360 }}：<a-tag
+                color="green"
+                style="font-size: 14px"
+              >
                 <div v-if="seodata.s360">
                   {{ seodata.s360 }}
                 </div>
@@ -72,7 +87,10 @@
               </a-tag></span
             >
             <span
-              >搜狗：<a-tag color="green" style="font-size: 14px">
+              >{{ MainDesc.seodescription.sougou }}：<a-tag
+                color="green"
+                style="font-size: 14px"
+              >
                 <div v-if="seodata.sougou">
                   {{ seodata.sougou }}
                 </div>
@@ -80,7 +98,10 @@
               </a-tag></span
             >
             <span
-              >神马：<a-tag color="green" style="font-size: 14px">
+              >{{ MainDesc.seodescription.shenma }}：<a-tag
+                color="green"
+                style="font-size: 14px"
+              >
                 <div v-if="seodata.shenma">
                   {{ seodata.shenma }}
                 </div>
@@ -89,16 +110,44 @@
             >
           </div>
           <div v-else>
-            <span>百度：<a-tag color="green" style="font-size: 14px"> - </a-tag></span>
-            <span>360：<a-tag color="green" style="font-size: 14px"> - </a-tag></span>
-            <span>搜狗：<a-tag color="green" style="font-size: 14px"> - </a-tag></span>
-            <span>神马：<a-tag color="green" style="font-size: 14px"> - </a-tag></span>
+            <span
+              >{{ MainDesc.seodescription.baidu }}：<a-tag
+                color="green"
+                style="font-size: 14px"
+              >
+                -
+              </a-tag></span
+            >
+            <span
+              >{{ MainDesc.seodescription.pc360 }}：<a-tag
+                color="green"
+                style="font-size: 14px"
+              >
+                -
+              </a-tag></span
+            >
+            <span
+              >{{ MainDesc.seodescription.sougou }}：<a-tag
+                color="green"
+                style="font-size: 14px"
+              >
+                -
+              </a-tag></span
+            >
+            <span
+              >{{ MainDesc.seodescription.shenma }}：<a-tag
+                color="green"
+                style="font-size: 14px"
+              >
+                -
+              </a-tag></span
+            >
           </div>
         </div>
-        <a-divider style="font-size: 18px">端口信息</a-divider>
+        <a-divider style="font-size: 18px">{{ MainDesc.portitle }}</a-divider>
         <div v-if="Ip || Domain">
           <div>
-            FOFA推荐语句：
+            {{ MainDesc.portdescription.recommendtitle }}：
             <a-tag color="green" style="font-size: 14px"> {{ Ip }} </a-tag>
             <a-button size="small" @click="copy(Ip)">
               <template #icon>
@@ -116,10 +165,18 @@
           </div>
         </div>
         <div v-else-if="Ip == 0 && Domain == 0">
-          <p>FOFA推荐语句：无法获取该站点信息</p>
+          <p>
+            {{ MainDesc.portdescription.recommendtitle }}：{{
+              MainDesc.portdescription.prompterror
+            }}
+          </p>
         </div>
         <div v-else>
-          <p>FOFA推荐语句：正在生成请稍等...</p>
+          <p>
+            {{ MainDesc.portdescription.recommendtitle }}：{{
+              MainDesc.portdescription.prompt
+            }}
+          </p>
         </div>
       </div>
       <div class="table">
@@ -184,6 +241,12 @@ export default defineComponent({
     const HostStatus = ref("");
     const tableLoading = ref("");
     const MainLoading = ref("");
+    //国际化开发语言
+    const MainDesc = ref(null);
+    MainDesc.value = JSON.parse(
+      // eslint-disable-next-line no-undef
+      chrome.i18n.getMessage("MainDesc").replaceAll("'", '"')
+    );
 
     //监听事件
     // eslint-disable-next-line no-undef
@@ -222,7 +285,7 @@ export default defineComponent({
           urldata.value = null;
           Ip.value = 0;
           Domain.value = 0;
-          message.error("请不要在插件中心点击此插件！");
+          message.error(MainDesc.value.MainError.buttonerror);
           return;
         } else {
           MainLoading.value = false;
@@ -231,7 +294,7 @@ export default defineComponent({
           urldata.value = null;
           Ip.value = 0;
           Domain.value = 0;
-          message.error("获取url失败，请刷新Tab");
+          message.error(MainDesc.value.MainError.geturlerror);
         }
       });
     };
@@ -413,6 +476,7 @@ export default defineComponent({
       MainLoading,
       tableLoading,
       seodata,
+      MainDesc,
 
       //自定义函数
       copy,
