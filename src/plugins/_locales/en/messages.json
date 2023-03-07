@@ -1,27 +1,12 @@
 {
     "extName": {
-        "message": "扩展的描述信息",
-        "description":"test"
+        "message": "fofa search",
+        "description": "Component identification, port query, site information, SEO information."
     },
-    "colores": {
-        "message": "colores",
-        "description":"test"
+    "extDesc": {
+        "message": "This is a chrome browser plug-in based on fofa to make it easy for users to quickly find information about the site."
     },
-    "title": "Component information",
-    "description": {
-        "country": "Country",
-        "city": "City",
-        "organization": "Organization"
-    },
-    "seotitle": "Site Weight Information",
-    "seodescription": {
-        "baidu": "Baidu",
-        "pc360": "360",
-        "sougou": "Sougou",
-        "shenmax": "Shenma"
-    },
-    "portitle": "Prot information",
-    "portdescription": {
-        "recommendtitle": "FOFA recommendation statement"
+    "MainDesc": {
+        "message": "{'title':'Basic information','description':{'country':'Country/Region','city':'City','organization':'Org','lastime':'Last update time'},'seotitle':'SEO Information','seodescription':{'baidu':' Baidu','pc360':'360','sougou':'Sougou','shenmax':'Shenma'},'portitle':'Open Port','portdescription':{'recommendtitle':'FOFA Query','prompt':'Loading','prompterror':'N/A'},'MainError':{'buttonerror':'Do not click this plugin in the Plugin Center!','geturlerror':'Failed to obtain url, please refresh Tab'}}"
     }
 }

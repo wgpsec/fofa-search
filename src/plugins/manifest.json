@@ -1,9 +1,9 @@
 {
-    "description": "This is a chrome browser plug-in based on fofa to make it easy for users to quickly find information about the site.",
+    "description": "__MSG_extDesc__",
     "manifest_version": 3,
-    "name": "fofa search",
-    "version": "1.1.0",
-    "default_locale":"zh", 
+    "name": "__MSG_extName__",
+    "version": "1.1.1",
+    "default_locale": "en",
     "action": {
         "default_icon": {
             "16": "assets/16.png",
