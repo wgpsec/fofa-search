@@ -1,4 +1,5 @@
-# Fofa Search
+
+![fofa-search](https://socialify.git.ci/wgpsec/fofa-search/image?font=Inter&forks=1&issues=1&language=1&name=1&owner=1&pulls=1&stargazers=1&theme=Auto)
 
 ## 简介
 
@@ -57,7 +58,7 @@ npm run lint
 -  2023-02-14 已添加SEO查询功能。
 -  2023-02-22 已上架Chrome商店，并成功发布
 -  2023-02-24 新增多语言，根据浏览器语言自动设置插件语言
-
+-  2023-12-27 新增作者，团队信息，移除失效功能SEO查询
 ## 致谢
 
 fofa-search已加入FOFA[共创者计划](https://fofa.info/development)，感谢FOFA提供的账号支持。
