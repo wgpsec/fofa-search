@@ -4,20 +4,17 @@
  * @Last Modified by: zhizhuo
  * @Last Modified time: 2023-02-02 13:45:25
  */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-undef */
 /* eslint-disable */
-
 console.log("background page is ok")
 
-URLDATA = null,
-COOKIESDATA = null,
+let URLDATA = null;
+let COOKIESDATA = null;
 
-    chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
         console.log(request);
         switch (request.cmd) {
             case 'inject':
-                geturl()
+                get_url()
                 break;
             case 'popup':
                 switch (request.click) {
@@ -25,7 +22,7 @@ COOKIESDATA = null,
                         sendResponse(URLDATA);
                         break;
                     case 'getcookies':
-                        getcookies(URLDATA)
+                        get_cookies(URLDATA)
                         sendResponse(COOKIESDATA);
                         break;
                     case 'do':
@@ -51,19 +48,18 @@ COOKIESDATA = null,
         sendResponse('OK');
     });
 
-function geturl() {
-    let data = chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
-        let url = tabs[0].url;
-        URLDATA = url
-        console.log('url--', url);
-        return url
-    }
+function get_url() {
+    return chrome.tabs.query({active: true, lastFocusedWindow: true}, (tabs) => {
+            let url = tabs[0].url;
+            URLDATA = url
+            console.log('url--', url);
+            return url
+        }
     );
-    return data;
 }
 
-function getcookies(url) {
-    let data = chrome.cookies.getAll({ url }, function (cookies) {
+function get_cookies(url) {
+    return chrome.cookies.getAll({url}, function (cookies) {
         const resList = cookies.map(item => {
             return `${item.name}=${item.value}`
         })
@@ -72,5 +68,4 @@ function getcookies(url) {
         COOKIESDATA = cookieStr
         return cookieStr;
     });
-    return data;
 }

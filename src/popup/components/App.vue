@@ -2,6 +2,10 @@
   <div class="main">
     <a-spin tip="Loading..." :delay="1" :spinning="MainLoading">
       <br />
+      <div class="top">
+        <span>{{MainDesc.author}}：zhizhuo</span>
+        <span style="margin-left: 10px">{{MainDesc.team}}：WgpSec</span>
+      </div>
       <div class="fofa-group">
         <div>
           <a-divider style="font-size: 18px">{{ MainDesc.title }}</a-divider>
@@ -63,87 +67,6 @@
             </a-spin>
           </div>
         </div>
-        <a-divider style="font-size: 18px">{{ MainDesc.seotitle }}</a-divider>
-        <div>
-          <div v-if="seodata" style="text-align: center">
-            <span
-              >{{ MainDesc.seodescription.baidu }}：
-              <a-tag color="green" style="font-size: 14px">
-                <div v-if="seodata.baidu">
-                  {{ seodata.baidu }}
-                </div>
-                <div v-else>-</div>
-              </a-tag>
-            </span>
-            <span
-              >{{ MainDesc.seodescription.pc360 }}：<a-tag
-                color="green"
-                style="font-size: 14px"
-              >
-                <div v-if="seodata.s360">
-                  {{ seodata.s360 }}
-                </div>
-                <div v-else>-</div>
-              </a-tag></span
-            >
-            <span
-              >{{ MainDesc.seodescription.sougou }}：<a-tag
-                color="green"
-                style="font-size: 14px"
-              >
-                <div v-if="seodata.sougou">
-                  {{ seodata.sougou }}
-                </div>
-                <div v-else>-</div>
-              </a-tag></span
-            >
-            <span
-              >{{ MainDesc.seodescription.shenma }}：<a-tag
-                color="green"
-                style="font-size: 14px"
-              >
-                <div v-if="seodata.shenma">
-                  {{ seodata.shenma }}
-                </div>
-                <div v-else>-</div>
-              </a-tag></span
-            >
-          </div>
-          <div v-else>
-            <span
-              >{{ MainDesc.seodescription.baidu }}：<a-tag
-                color="green"
-                style="font-size: 14px"
-              >
-                -
-              </a-tag></span
-            >
-            <span
-              >{{ MainDesc.seodescription.pc360 }}：<a-tag
-                color="green"
-                style="font-size: 14px"
-              >
-                -
-              </a-tag></span
-            >
-            <span
-              >{{ MainDesc.seodescription.sougou }}：<a-tag
-                color="green"
-                style="font-size: 14px"
-              >
-                -
-              </a-tag></span
-            >
-            <span
-              >{{ MainDesc.seodescription.shenma }}：<a-tag
-                color="green"
-                style="font-size: 14px"
-              >
-                -
-              </a-tag></span
-            >
-          </div>
-        </div>
         <a-divider style="font-size: 18px">{{ MainDesc.portitle }}</a-divider>
         <div v-if="Ip || Domain">
           <div>
@@ -164,7 +87,7 @@
             </a-button>
           </div>
         </div>
-        <div v-else-if="Ip == 0 && Domain == 0">
+        <div v-else-if="Ip === 0 && Domain === 0">
           <p>
             {{ MainDesc.portdescription.recommendtitle }}：{{
               MainDesc.portdescription.prompterror
@@ -218,7 +141,6 @@
   </div>
 </template>
 <script>
-// eslint-disable-next-line no-undef
 import { ref, getCurrentInstance, onMounted, defineComponent } from "vue";
 import { CopyOutlined } from "@ant-design/icons-vue";
 import { message } from "ant-design-vue";
@@ -232,17 +154,16 @@ export default defineComponent({
     const { proxy } = getCurrentInstance(); //来获取全局 globalProperties 中配置的信息
     //定义变量
     const urldata = ref(null);
-    const seodata = ref({});
     const domaindata = ref("");
     const dataSource = ref([]);
     const Ip = ref(null);
     const Domain = ref(null);
     const HostData = ref({});
-    const HostStatus = ref("");
-    const tableLoading = ref("");
+    const HostStatus = ref();
+    const tableLoading = ref();
     const MainLoading = ref("");
     //国际化开发语言
-    const MainDesc = ref(null);
+    const MainDesc = ref({});
     MainDesc.value = JSON.parse(
       // eslint-disable-next-line no-undef
       chrome.i18n.getMessage("MainDesc").replaceAll("'", '"')
@@ -252,21 +173,20 @@ export default defineComponent({
     // eslint-disable-next-line no-undef
     chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
       if (
-        request.click == "sendurl" &&
-        MainLoading.value == true &&
-        HostStatus.value == true &&
-        tableLoading.value == true
+        request.click === "sendurl" &&
+        MainLoading.value === true &&
+        HostStatus.value === true &&
+        tableLoading.value === true
       ) {
         getHost();
-        geturlinfo();
-        getseo();
+        get_urlinfo();
         return;
       }
       sendResponse("OK");
     });
 
     //获取URL
-    const geturl = () => {
+    const get_url = () => {
       // eslint-disable-next-line no-undef
       chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
         let url = tabs[0].url;
@@ -278,7 +198,7 @@ export default defineComponent({
             url = url.substring(0, url.indexOf(":"));
           }
           urldata.value = url;
-        } else if (url.indexOf("chrome://") != -1) {
+        } else if (url.indexOf("chrome://") !== -1) {
           MainLoading.value = false;
           tableLoading.value = false;
           HostStatus.value = false;
@@ -286,7 +206,6 @@ export default defineComponent({
           Ip.value = 0;
           Domain.value = 0;
           message.error(MainDesc.value.MainError.buttonerror);
-          return;
         } else {
           MainLoading.value = false;
           tableLoading.value = false;
@@ -294,13 +213,13 @@ export default defineComponent({
           urldata.value = null;
           Ip.value = 0;
           Domain.value = 0;
-          message.error(MainDesc.value.MainError.geturlerror);
+          message.error(MainDesc.value.MainError.get_urlerror);
         }
       });
     };
 
     //获取站点信息
-    const geturlinfo = () => {
+    const get_urlinfo = () => {
       try {
         let search = urldata.value;
         let domain = null;
@@ -405,21 +324,6 @@ export default defineComponent({
         message.error("ERROR:" + error.message);
       }
     };
-    //获取seo信息
-    const getseo = () => {
-      try {
-        let url = urldata.value;
-        proxy.$get(`http://api.iot-wiki.cn/api/v1/seo?url=${url}`).then((res) => {
-          if (res.code == 200) {
-            seodata.value = res.data.list;
-          } else {
-            message.error("ERROR:" + res.message);
-          }
-        });
-      } catch (error) {
-        message.error("ERROR:" + error.message);
-      }
-    };
 
     //单击复制事件
     const copy = (event) => {
@@ -432,7 +336,7 @@ export default defineComponent({
       tableLoading.value = true;
       HostStatus.value = true;
       MainLoading.value = true;
-      geturl();
+      get_url();
     });
 
     return {
@@ -475,7 +379,6 @@ export default defineComponent({
       HostStatus,
       MainLoading,
       tableLoading,
-      seodata,
       MainDesc,
 
       //自定义函数
@@ -488,6 +391,10 @@ export default defineComponent({
 .main {
   width: 600px;
   height: 400px;
+}
+.top{
+  margin-left: 25px;
+  font-size: 13px;
 }
 .fofa-group {
   margin-left: 25px;

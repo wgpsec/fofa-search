@@ -7,6 +7,6 @@
         "message": "This is a chrome browser plug-in based on fofa to make it easy for users to quickly find information about the site."
     },
     "MainDesc": {
-        "message": "{'title':'Basic information','description':{'country':'Country/Region','city':'City','organization':'Org','lastime':'Last update time'},'seotitle':'SEO Information','seodescription':{'baidu':' Baidu','pc360':'360','sougou':'Sougou','shenma':'Shenma'},'portitle':'Open Port','portdescription':{'recommendtitle':'FOFA Query','prompt':'Loading','prompterror':'N/A'},'MainError':{'buttonerror':'Do not click this plugin in the Plugin Center!','geturlerror':'Failed to obtain url, please refresh Tab'}}"
+        "message": "{'author': 'Author', 'team': 'Team', 'title': 'Basic information', 'description': {'country': 'Country/Region', 'city': 'City', 'organization': 'Org', 'lastime': 'Last update time'}, 'seotitle': 'SEO Information', 'portitle': 'Open Port', 'portdescription': {'recommendtitle': 'FOFA Query', 'prompt': 'Loading', 'prompterror': 'N/A'}, 'MainError': {'buttonerror': 'Do not click this plugin in the Plugin Center!', 'geturlerror': 'Failed to obtain url, please refresh Tab'}}"
     }
 }
