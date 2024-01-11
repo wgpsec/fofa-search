@@ -1,6 +1,6 @@
 {
   "name": "fofa-search",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service build --watch",
@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@ant-design/icons-vue": "^6.1.0",
-    "ant-design-vue": "^3.3.0-beta.4",
-    "axios": "^1.2.2",
+    "ant-design-vue": "^4.1.0",
+    "axios": "1.6.0",
     "cheerio": "^1.0.0-rc.12",
     "core-js": "^3.8.3",
     "js-cookie": "^3.0.1",

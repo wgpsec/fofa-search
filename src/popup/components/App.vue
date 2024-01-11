@@ -5,6 +5,7 @@
       <div class="top">
         <span>{{MainDesc.author}}：zhizhuo</span>
         <span style="margin-left: 10px">{{MainDesc.team}}：WgpSec</span>
+        <a-button type="primary" shape="round" style="float: right;margin-right: 20px" @click="create_goby()">{{MainDesc.open_goby}}</a-button>
       </div>
       <div class="fofa-group">
         <div>
@@ -146,6 +147,7 @@ import { CopyOutlined } from "@ant-design/icons-vue";
 import { message } from "ant-design-vue";
 import * as cheerio from "cheerio";
 
+
 export default defineComponent({
   components: {
     CopyOutlined,
@@ -153,7 +155,7 @@ export default defineComponent({
   setup() {
     const { proxy } = getCurrentInstance(); //来获取全局 globalProperties 中配置的信息
     //定义变量
-    const urldata = ref(null);
+    const urldata = ref(null);//url地址
     const domaindata = ref("");
     const dataSource = ref([]);
     const Ip = ref(null);
@@ -161,9 +163,34 @@ export default defineComponent({
     const HostData = ref({});
     const HostStatus = ref();
     const tableLoading = ref();
-    const MainLoading = ref("");
+    const MainLoading = ref(false);
+    const PortList=ref([])
     //国际化开发语言
-    const MainDesc = ref({});
+    const MainDesc = ref({
+      "author": "Author",
+      "team": "Team",
+      "title": "Basic information",
+      "open_goby": "Create a goby scan",
+      "description": {
+        "country": "Country/Region",
+        "city": "City",
+        "organization": "Org",
+        "lastime": "Last update time"
+      },
+      "seotitle": "SEO Information",
+      "portitle": "Open Port",
+      "portdescription": {
+        "recommendtitle": "FOFA Query",
+        "prompt": "Loading",
+        "prompterror": "N/A"
+      },
+      "MainError": {
+        "buttonerror": "Do not click this plugin in the Plugin Center!",
+        "geturlerror": "Failed to obtain url, please refresh Tab",
+        "create_error": "Creation failure",
+        "create_success":"Created successfully"
+      }
+    });
     MainDesc.value = JSON.parse(
       // eslint-disable-next-line no-undef
       chrome.i18n.getMessage("MainDesc").replaceAll("'", '"')
@@ -243,6 +270,7 @@ export default defineComponent({
             Domain.value = `domain="${domain}"`;
             res.ports.forEach((item) => {
               let resultdata = {};
+              PortList.value.push(item.port)
               resultdata.port = item.port;
               resultdata.base_protocol = item.base_protocol;
               resultdata.protocol = item.protocol;
@@ -331,6 +359,18 @@ export default defineComponent({
         message.success("Copy Success");
       });
     };
+    //创建goby扫描任务
+    const create_goby=()=>{
+      let ips=urldata.value
+      let ports=PortList.value
+      const goby_url = `goby://openScanDia?ips=${ips}&&ports=${ports.join(',')}`;
+      if(!ips || !ports){
+        message.error(MainDesc.value.MainError.create_error)
+      }else{
+        message.success(MainDesc.value.MainError.create_success)
+        window.open(goby_url)
+      }
+    }
     //节点挂在执行的事件
     onMounted(() => {
       tableLoading.value = true;
@@ -383,6 +423,7 @@ export default defineComponent({
 
       //自定义函数
       copy,
+      create_goby,
     };
   },
 });

@@ -3,7 +3,7 @@ import { createApp } from 'vue'
 import App from './components/App.vue'
 //引入第三方组件
 import Antd from 'ant-design-vue';
-import 'ant-design-vue/dist/antd.css';
+import 'ant-design-vue/dist/reset.css';
 //引入axios
 import axios from '../plugins/axios'
 
